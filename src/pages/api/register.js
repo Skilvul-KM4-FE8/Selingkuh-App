@@ -53,8 +53,9 @@ export default async function handler(req, res) {
     const allUsers = await prisma.user.findMany()
     console.log(allUsers)
 
-    console.log("Running")
-    return res.status(200).json({status: "success"})
+
+  console.log("Running");
+  return res.status(200).json({ status: "success" });
 }
 
 // handler()
