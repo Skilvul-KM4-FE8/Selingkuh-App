@@ -6,16 +6,18 @@ async function main() {
     // prisma queries will be here
 
     // addData
-    await prisma.user.create({
-        data: {
-            name: "Rafai (dev)",
-            email: "devtest@gmail.com",
-            password: "test123"
-        }
-    })
+    // await prisma.user.create({
+    //     data: {
+    //         name: "Rafai (dev)",
+    //         email: "devtest@gmail.com",
+    //         password: "test123"
+    //     }
+    // })
 
     const allUsers = await prisma.user.findMany()
     console.log(allUsers)
+
+    console.log("Running")
 }
 
 main()
