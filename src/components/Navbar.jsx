@@ -1,3 +1,5 @@
+const { default: Link } = require("next/link");
+
 function Navbar() {
   return (
     <nav>

@@ -14,6 +14,8 @@ async function main(req, res) {
     },
   });
 
+  res.status(200).json({ message: "User created successfully" });
+
   const allUsers = await prisma.user.findMany();
   console.log(allUsers);
 }
