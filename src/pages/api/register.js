@@ -2,28 +2,36 @@ const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-async function main(req, res) {
-  // prisma queries will be here
 
-  // addData
-  await prisma.user.create({
-    data: {
-      name: req.user.name,
-      email: req.user.email,
-      password: req.user.password,
-    },
-  });
+export default async function handler(req, res) {
+    const result = req.body
+    console.log(result)
+    
 
-  const allUsers = await prisma.user.findMany();
-  console.log(allUsers);
+    // prisma queries will be here
+
+    // addData
+    await prisma.user.create({
+        data: {
+            name: result.name,
+            email: result.email,
+            password: result.password
+        }
+    })
+
+    const allUsers = await prisma.user.findMany()
+    console.log(allUsers)
+
+    console.log("Running")
+    return res.status(200).json({status: "success"})
 }
 
-main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.log(e);
-    await prisma.$disconnect();
-    process.exit(1);
-  });
+// handler()
+//     .then(async () => {
+//         await prisma.$disconnect()
+//     })
+//     .catch(async (e) => {
+//         console.log(e)
+//         await prisma.$disconnect()
+//         process.exit(1)
+//     })
