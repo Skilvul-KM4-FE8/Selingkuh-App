@@ -41,11 +41,17 @@ function Page() {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-      } else {
-        console.error("Register failed");
-      }
+        alert("Register success");
+      } 
+      // else {
+      //   console.error("Register failed");
+      //   // console.log(response)
+        
+      //   alert(response);
+      // }
     } catch (error) {
       console.error("Register failed", error);
+      alert(error.message);
     }
   };
 
