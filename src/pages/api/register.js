@@ -1,6 +1,7 @@
-const { PrismaClient } =require("@prisma/client")
+const { PrismaClient } = require("@prisma/client");
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
+
 const bcrypt = require("bcrypt")
 const saltRounds = 10
 const myPlaintextPassword = 's0/\/\P4$$w0rD'
