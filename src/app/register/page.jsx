@@ -38,11 +38,20 @@ function Page() {
         }),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-        alert("Register success");
-      } 
+      const data = await response.json();
+      console.log(data.message);
+
+        if (!response.ok) {
+            if (response.status === 400 && data.email) {
+                alert(data.message);
+            }
+            if (response.status === 400 || response.body.name) {
+                alert(data.message);
+            }
+        } else {
+            alert("Register success");
+            console.log(data);
+        }
       // else {
       //   console.error("Register failed");
       //   // console.log(response)

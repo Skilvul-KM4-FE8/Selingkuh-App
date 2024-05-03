@@ -14,6 +14,19 @@ export default async function handler(req, res) {
     console.log(result.name)
 
     // check email is used
+    // const user = await prisma.user.findFirst({
+    //     where: {
+    //       OR: [
+    //         {
+    //           email: result.email,
+    //         },
+    //         {
+    //           name: result.name,
+    //         },
+    //       ],
+    //     },
+    //   });
+
     const isUsedEmail = await prisma.user.findFirst({
         where: {
             email: result.email,
@@ -25,12 +38,16 @@ export default async function handler(req, res) {
         },
     })
 
-    if(isUsedEmail) {
-        return res.status(405).json({message: "Email sudah terpakai"})
-    }  
-    if (isUsedUsername) {
-        return res.status(405).json({message: "Username sudah terpakai"})
-    }    
+    //   console.log(user)
+      
+    //   if (user) {
+        if (isUsedEmail) {
+          return res.status(400).json({ message: "Email sudah terpakai", email: true });
+        } 
+        if(isUsedUsername) {
+          return res.status(400).json({ message: "Username sudah terpakai", name: true });
+        }
+    //   }
 
 
 
