@@ -2,16 +2,16 @@ const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-const bcrypt = require("bcrypt")
-const saltRounds = 10
-const myPlaintextPassword = 's0/\/\P4$$w0rD'
-const someOtherPlaintextPassword = "not_bacon"
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+const myPlaintextPassword = "s0//P4$$w0rD";
+const someOtherPlaintextPassword = "not_bacon";
 
 export default async function handler(req, res) {
-    
-    const result = req.body
-    console.log(result.email)
-    console.log(result.name)
+  const result = req.body;
+  console.log(result.email);
+  console.log(result.name);
+
 
     // check email is used
     // const user = await prisma.user.findFirst({
@@ -50,26 +50,23 @@ export default async function handler(req, res) {
     //   }
 
 
+  // let hashedPass = ""
+  // console.log(result)
 
-    // let hashedPass = "" 
-    // console.log(result)
-    
-    bcrypt.hash(result.password, saltRounds,  async (err, hash) => {
-        await prisma.user.create({
-            data: {
-                name: result.name,
-                email: result.email,
-                password: hash
-            }
-        })
-    })
+  bcrypt.hash(result.password, saltRounds, async (err, hash) => {
+    await prisma.user.create({
+      data: {
+        name: result.name,
+        email: result.email,
+        password: hash,
+      },
+    });
+  });
 
-    // addData
+  // addData
 
-
-    const allUsers = await prisma.user.findMany()
-    console.log(allUsers)
-
+  const allUsers = await prisma.user.findMany();
+  console.log(allUsers);
 
   console.log("Running");
   return res.status(200).json({ status: "success" });
