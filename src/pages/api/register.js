@@ -2,10 +2,10 @@ const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-const bcrypt = require("bcrypt")
-const saltRounds = 10
-const myPlaintextPassword = 's0/\/\P4$$w0rD'
-const someOtherPlaintextPassword = "not_bacon"
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+const myPlaintextPassword = "s0//P4$$w0rD";
+const someOtherPlaintextPassword = "not_bacon";
 
 export default async function handler(req, res) {
     
@@ -34,6 +34,7 @@ export default async function handler(req, res) {
     console.log(allUsers)
 
     console.log("Running")
+
 }
 
 // handler()

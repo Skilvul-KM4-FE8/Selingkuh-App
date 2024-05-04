@@ -19,5 +19,6 @@ model Users {
   image    String @default("https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg")
   email    String @unique
   password String
+  image    String @default("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png")
   createdAt DateTime @default(now())
 }

@@ -1,7 +1,7 @@
 function Footer() {
   return (
-    <footer className="bg-primary text-primary-foreground p-4 text-center">
-      <p>© 2021 Shad.cn</p>
+    <footer className="mt-16 bg-primary text-primary-foreground p-4 text-center">
+      <p>© 2024 Selingkuh-app</p>
       <p>All rights reserved.</p>
     </footer>
   );
