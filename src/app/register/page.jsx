@@ -33,7 +33,7 @@ function Page() {
 
   const handleRegister = async () => {
     try {
-      const response = await fetch("/api/coba", {
+      const response = await fetch("/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
