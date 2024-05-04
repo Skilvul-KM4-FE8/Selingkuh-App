@@ -5,21 +5,19 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  name     String
-  image    String @default("https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg")
-  email    String
+  id       Int     @id @default(autoincrement())
+  email    String  
+  image    String  @default("https://www.gravatar.com/avatar")
+  name     String  
   password String
-  image    String @default("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png")
-  createdAt DateTime @default(now())
 }
