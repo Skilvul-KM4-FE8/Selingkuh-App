@@ -42,10 +42,10 @@ function Page() {
       console.log(data.message);
 
         if (!response.ok) {
-            if (response.status === 400 && data.email) {
+            if (response.status === 400 && data.used === "email") {
                 alert(data.message);
             }
-            if (response.status === 400 || response.body.name) {
+            if (response.status === 400 || data.used === "name") {
                 alert(data.message);
             }
         } else {
