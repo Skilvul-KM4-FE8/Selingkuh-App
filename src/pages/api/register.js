@@ -20,7 +20,7 @@ export default async function handler(req, res) {
                     password: hash
                 }
             })
-            return res.status(200).json({status: "success"})
+            return res.status(200).json({status:  "success"})
         } catch (error) {
             console.log("===========")
             // console.log(error)
