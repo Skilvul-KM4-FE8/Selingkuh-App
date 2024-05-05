@@ -15,9 +15,10 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  email    String  
-  image    String  @default("https://www.gravatar.com/avatar")
-  name     String  
-  password String
+  id        Int     @id @default(autoincrement())
+  email     String  
+  image     String  @default("https://www.gravatar.com/avatar")
+  name      String  
+  password  String
+  createdAt DateTime @default(now())
 }
