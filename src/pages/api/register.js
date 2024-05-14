@@ -46,7 +46,7 @@ export default async function handler(req, res) {
             console.log(error.message.includes("email"))
             // console.log(error)
             let used = (error.message.includes("email")) ? "Email" : "Nama"
-            // console.log(used)
+            console.log(used)
             // return res.status(400).json({message : `${error?.meta.target[0]} sudah terdaftar!`, data: used})
             return res.status(400).json({message : `${used} sudah terdaftar. Silahkan gunakan ${used} yang lain! `, data: used})
         }
@@ -56,49 +56,49 @@ export default async function handler(req, res) {
     // console.log(allUsers)
 
 
-  const isUsedEmail = await prisma.user.findFirst({
-    where: {
-      email: result.email,
-    },
-  });
-  const isUsedUsername = await prisma.user.findFirst({
-    where: {
-      name: result.name,
-    },
-  });
+//   const isUsedEmail = await prisma.user.findFirst({
+//     where: {
+//       email: result.email,
+//     },
+//   });
+//   const isUsedUsername = await prisma.user.findFirst({
+//     where: {
+//       name: result.name,
+//     },
+//   });
 
-  //   console.log(user)
+//   //   console.log(user)
 
-  //   if (user) {
-  if (isUsedEmail) {
-    return res
-      .status(400)
-      .json({ message: "Email sudah terpakai", email: true });
-  }
-  if (isUsedUsername) {
-    return res
-      .status(400)
-      .json({ message: "Username sudah terpakai", name: true });
-  }
-  //   }
+//   //   if (user) {
+//   if (isUsedEmail) {
+//     return res
+//       .status(400)
+//       .json({ message: "Email sudah terpakai", email: true });
+//   }
+//   if (isUsedUsername) {
+//     return res
+//       .status(400)
+//       .json({ message: "Username sudah terpakai", name: true });
+//   }
+//   //   }
 
-  // let hashedPass = ""
-  // console.log(result)
+//   // let hashedPass = ""
+//   // console.log(result)
 
-  bcrypt.hash(result.password, saltRounds, async (err, hash) => {
-    await prisma.user.create({
-      data: {
-        name: result.name,
-        email: result.email,
-        password: hash,
-      },
-    });
-  });
+//   bcrypt.hash(result.password, saltRounds, async (err, hash) => {
+//     await prisma.users.create({
+//       data: {
+//         name: result.name,
+//         email: result.email,
+//         password: hash,
+//       },
+//     });
+//   });
 
   // addData
 
-  const allUsers = await prisma.user.findMany();
-  console.log(allUsers);
+//   const allUsers = await prisma.user.findMany();
+//   console.log(allUsers);
 
   console.log("Running");
   return res.status(200).json({ status: "success" });
