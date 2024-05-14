@@ -50,10 +50,10 @@ function Page() {
 
 
         if (!response.ok) {
-            if (response.status === 400 && data.used === "email") {
+            if (response.status === 400 && data.used === "Email") {
                 alert(data.message);
             }
-            if (response.status === 400 || data.used === "name") {
+            if (response.status === 400 || data.used === "Name") {
                 alert(data.message);
             }
         } else {
@@ -61,13 +61,15 @@ function Page() {
             console.log(data);
 
         }
-        if (response.status === 400 || response.body.name) {
-          alert(data.message);
-        }
+        // if (response.status === 400 || response.body.name) {
+        //   alert(data.message);
+        // }
         
       } catch (error) {
-        alert("Register success");
-        console.log(data);
+        console.log("Register failed", error);
+        alert(error.message);
+        // console.log(data);
+        // console.log(error)
       }
       // else {
       //   console.error("Register failed");
