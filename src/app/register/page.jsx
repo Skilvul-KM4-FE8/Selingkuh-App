@@ -46,7 +46,7 @@ function Page() {
       });
 
       const data = await response.json();
-      console.log(data.message);
+      console.log(data);
 
 
         if (!response.ok) {
@@ -61,28 +61,12 @@ function Page() {
             console.log(data);
 
         }
-        // if (response.status === 400 || response.body.name) {
-        //   alert(data.message);
-        // }
         
       } catch (error) {
         console.log("Register failed", error);
         alert(error.message);
-        // console.log(data);
-        // console.log(error)
       }
-      // else {
-      //   console.error("Register failed");
-      //   // console.log(response)
-
-      //   alert(response);
-      // }
     } 
-    // else{
-    //   console.log("Register failed", error);
-    //   alert(error.message);
-    // }
-  
 
   return (
     <div className="flex justify-center items-center h-screen">
