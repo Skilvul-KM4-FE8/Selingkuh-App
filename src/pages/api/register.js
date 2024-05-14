@@ -40,12 +40,12 @@ export default async function handler(req, res) {
             return res.status(200).json({status:  "success"})
         } catch (error) {
             console.log("===========")
-            console.log(error)
+            console.log(error.message.includes("email"))
             // console.log(error)
-            // let used = (error?.meta.target[0] == "email") ? "email" : "name"
+            let used = (error.message.includes("email")) ? "Email" : "Nama"
             // console.log(used)
             // return res.status(400).json({message : `${error?.meta.target[0]} sudah terdaftar!`, data: used})
-            return res.status(400).json({message : `${error} `, data: "used"})
+            return res.status(400).json({message : `${used} sudah terdaftar. Silahkan gunakan ${used} yang lain! `, data: used})
         }
     })
 
