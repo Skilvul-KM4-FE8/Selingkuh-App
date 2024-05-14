@@ -1,6 +1,22 @@
-const { PrismaClient } = require("@prisma/client");
+// const { PrismaClient } = require("@prisma/client");
 
-const prisma = new PrismaClient();
+// import { PrismaClient } from '@prisma/client'
+// import { PrismaLibSQL } from '@prisma/adapter-libsql'
+// import { createClient } from '@libsql/client'
+
+const { PrismaClient } = require("@prisma/client")
+const { PrismaLibSQL } = require("@prisma/adapter-libsql")
+const { createClient } = require("@libsql/client")
+
+const libsql = createClient({
+    url: `${process.env.TURSO_DATABASE_URL}`,
+    authToken: `${process.env.TURSO_AUTH_TOKEN}`,
+})
+
+const adapter = new PrismaLibSQL(libsql)
+const prisma = new PrismaClient({ adapter })
+
+// const prisma = new PrismaClient();
 
 const bcrypt = require("bcrypt")
 const saltRounds = 10
@@ -10,6 +26,7 @@ const someOtherPlaintextPassword = "not_bacon"
 export default async function handler(req, res) {
     
     const result = req.body
+    // console.log(result)
     
     bcrypt.hash(result.password, saltRounds,  async (err, hash) => {
         try {
@@ -23,15 +40,17 @@ export default async function handler(req, res) {
             return res.status(200).json({status:  "success"})
         } catch (error) {
             console.log("===========")
+            console.log(error)
             // console.log(error)
-            let used = (error?.meta.target[0] == "email") ? "email" : "name"
-            console.log(used)
-            return res.status(400).json({message : `${error?.meta.target[0]} sudah terdaftar!`, data: used})
+            // let used = (error?.meta.target[0] == "email") ? "email" : "name"
+            // console.log(used)
+            // return res.status(400).json({message : `${error?.meta.target[0]} sudah terdaftar!`, data: used})
+            return res.status(400).json({message : `${error} `, data: "used"})
         }
     })
 
-    const allUsers = await prisma.users.findMany()
-    console.log(allUsers)
+    // const allUsers = await prisma.users.findMany()
+    // console.log(allUsers)
 
     console.log("Running")
 }

@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@libsql/client": "^0.6.0",
+    "@prisma/adapter-libsql": "^5.13.0",
     "@prisma/client": "^5.13.0",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-select": "^2.0.0",
