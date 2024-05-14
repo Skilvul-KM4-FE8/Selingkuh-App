@@ -4,7 +4,7 @@ import React from "react";
 
 function Navbar() {
   return (
-    <nav className="bg-primary text-primary-foreground flex justify-between items-center p-4">
+    <nav className="bg-transparant text-primary-foreground flex justify-between items-center p-4">
       <div className="text-lg font-bold">Selingkuh-app</div>
       <div>
         <Link href="/login">
@@ -13,9 +13,7 @@ function Navbar() {
           </Button>
         </Link>
         <Link href="register">
-          <Button className="bg-secondary text-secondary-foreground px-4 py-2 rounded-md hover:bg-accent hover:text-accent-foreground transition-colors duration-300">
-            Register
-          </Button>
+          <Button className="">Register</Button>
         </Link>
       </div>
     </nav>
