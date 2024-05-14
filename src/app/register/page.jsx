@@ -48,11 +48,7 @@ function Page() {
       const data = await response.json();
       console.log(data.message);
 
-<<<<<<< HEAD
-      if (!response.ok) {
-        if (response.status === 400 && data.email) {
-          alert(data.message);
-=======
+
         if (!response.ok) {
             if (response.status === 400 && data.used === "email") {
                 alert(data.message);
@@ -63,12 +59,12 @@ function Page() {
         } else {
             alert("Register success");
             console.log(data);
->>>>>>> dev
+
         }
         if (response.status === 400 || response.body.name) {
           alert(data.message);
         }
-      } else {
+      } catch (error) {
         alert("Register success");
         console.log(data);
       }
@@ -78,8 +74,8 @@ function Page() {
 
       //   alert(response);
       // }
-    } catch (error) {
-      console.error("Register failed", error);
+    } else{
+      console.log("Register failed", error);
       alert(error.message);
     }
   };
@@ -134,6 +130,6 @@ function Page() {
       </Card>
     </div>
   );
-}
+
 
 export default Page;
