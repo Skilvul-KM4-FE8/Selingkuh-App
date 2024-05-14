@@ -64,6 +64,7 @@ function Page() {
         if (response.status === 400 || response.body.name) {
           alert(data.message);
         }
+        
       } catch (error) {
         alert("Register success");
         console.log(data);
@@ -79,7 +80,7 @@ function Page() {
     //   console.log("Register failed", error);
     //   alert(error.message);
     // }
-  };
+  
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -131,6 +132,7 @@ function Page() {
       </Card>
     </div>
   );
+}
 
 
 export default Page;
