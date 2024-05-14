@@ -1,6 +1,14 @@
 const { PrismaClient } = require("@prisma/client");
+const { PrismaLibSQL } = require("@prisma/adapter-libsql");
+const { createClient } = require("@libsql/client");
 
-const prisma = new PrismaClient();
+const libsql = createClient({
+  url: `${process.env.TURSO_DATABASE_URL}`,
+  authToken: `${process.env.TURSO_AUTH_TOKEN}`,
+});
+
+const adapter = new PrismaLibSQL(libsql);
+const prisma = new PrismaClient({ adapter });
 
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
@@ -8,33 +16,70 @@ const myPlaintextPassword = "s0//P4$$w0rD";
 const someOtherPlaintextPassword = "not_bacon";
 
 export default async function handler(req, res) {
-    
-    const result = req.body
-    
-    bcrypt.hash(result.password, saltRounds,  async (err, hash) => {
-        try {
-            await prisma.users.create({
-                data: {
-                    name: result.name,
-                    email: result.email,
-                    password: hash
-                }
-            })
-            return res.status(200).json({status: "success"})
-        } catch (error) {
-            console.log("===========")
-            // console.log(error)
-            let used = (error?.meta.target[0] == "email") ? "email" : "name"
-            console.log(used)
-            return res.status(400).json({message : `${error?.meta.target[0]} sudah terdaftar!`, data: used})
-        }
-    })
+  const result = req.body;
+  console.log(result.email);
+  console.log(result.name);
 
-    const allUsers = await prisma.users.findMany()
-    console.log(allUsers)
+  // check email is used
+  // const user = await prisma.user.findFirst({
+  //     where: {
+  //       OR: [
+  //         {
+  //           email: result.email,
+  //         },
+  //         {
+  //           name: result.name,
+  //         },
+  //       ],
+  //     },
+  //   });
 
-    console.log("Running")
+  const isUsedEmail = await prisma.user.findFirst({
+    where: {
+      email: result.email,
+    },
+  });
+  const isUsedUsername = await prisma.user.findFirst({
+    where: {
+      name: result.name,
+    },
+  });
 
+  //   console.log(user)
+
+  //   if (user) {
+  if (isUsedEmail) {
+    return res
+      .status(400)
+      .json({ message: "Email sudah terpakai", email: true });
+  }
+  if (isUsedUsername) {
+    return res
+      .status(400)
+      .json({ message: "Username sudah terpakai", name: true });
+  }
+  //   }
+
+  // let hashedPass = ""
+  // console.log(result)
+
+  bcrypt.hash(result.password, saltRounds, async (err, hash) => {
+    await prisma.user.create({
+      data: {
+        name: result.name,
+        email: result.email,
+        password: hash,
+      },
+    });
+  });
+
+  // addData
+
+  const allUsers = await prisma.user.findMany();
+  console.log(allUsers);
+
+  console.log("Running");
+  return res.status(200).json({ status: "success" });
 }
 
 // handler()
