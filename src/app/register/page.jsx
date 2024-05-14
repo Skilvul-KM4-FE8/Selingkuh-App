@@ -2,7 +2,14 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
@@ -41,6 +48,7 @@ function Page() {
       const data = await response.json();
       console.log(data.message);
 
+
         if (!response.ok) {
             if (response.status === 400 && data.used === "email") {
                 alert(data.message);
@@ -51,41 +59,69 @@ function Page() {
         } else {
             alert("Register success");
             console.log(data);
+
         }
+        if (response.status === 400 || response.body.name) {
+          alert(data.message);
+        }
+        
+      } catch (error) {
+        alert("Register success");
+        console.log(data);
+      }
       // else {
       //   console.error("Register failed");
       //   // console.log(response)
-        
+
       //   alert(response);
       // }
-    } catch (error) {
-      console.error("Register failed", error);
-      alert(error.message);
-    }
-  };
+    } 
+    // else{
+    //   console.log("Register failed", error);
+    //   alert(error.message);
+    // }
+  
 
   return (
     <div className="flex justify-center items-center h-screen">
       <Card className="w-[350px]">
         <CardHeader>
           <CardTitle>Register</CardTitle>
-          <CardDescription>Silahkan Register terlebih dahulu sebelum kamu chatan dengan selingkuhanmu yaa...</CardDescription>
+          <CardDescription>
+            Silahkan Register terlebih dahulu sebelum kamu chatan dengan
+            selingkuhanmu yaa...
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form>
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="name">Email</Label>
-                <Input id="name" placeholder="Email Kamu" value={email} onChange={handleEmailChange} />
+                <Input
+                  id="name"
+                  placeholder="Email Kamu"
+                  value={email}
+                  onChange={handleEmailChange}
+                />
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="name">Nama</Label>
-                <Input id="name" placeholder="Nama Kamu" value={name} onChange={(e) => setName(e.target.value)} />
+                <Input
+                  id="name"
+                  placeholder="Nama Kamu"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </div>
 
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="name">Password</Label>
-                <Input id="name" type="password" placeholder="Password kamu" onChange={(e) => setPassword(e.target.value)} />
+                <Input
+                  id="name"
+                  type="password"
+                  placeholder="Password kamu"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </div>
             </div>
           </form>
@@ -97,5 +133,6 @@ function Page() {
     </div>
   );
 }
+
 
 export default Page;
