@@ -88,7 +88,9 @@ function Page() {
                 />
               </div>
             </div>
-            <Button onClick={handleLogin}>Login</Button>
+            <Button className="mt-5" onClick={handleLogin}>
+              Login
+            </Button>
           </form>
         </CardContent>
         <CardFooter className="flex justify-between"></CardFooter>
